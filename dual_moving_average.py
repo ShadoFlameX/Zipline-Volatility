@@ -10,5 +10,5 @@ def initialize(context):
 
 
 def handle_data(context, data):
-    order(symbol('AAPL'), 10)
+    order(symbol('AAPL'), 3)
     record(AAPL=data[symbol('AAPL')].price)
