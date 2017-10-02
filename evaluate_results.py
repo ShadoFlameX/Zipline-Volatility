@@ -56,12 +56,20 @@ def plotData(dataFrame):
 		plt.savefig(RESULTS_PLOTS_DIR + 'plot%d.png' % index)
 
 def printSummary(dataFrame):
-	print "================ Portfolio Summary ================"
-	print " Position Value: %s" % locale.currency(dataFrame.ending_value[-1], grouping=True )
-	print "    Profit/Loss: %s" % locale.currency(dataFrame.pnl[-1], grouping=True )
-	print "           Cash: %s" % locale.currency(dataFrame.ending_cash[-1], grouping=True )
-	print "Portfolio Total: %s" % locale.currency(dataFrame.portfolio_value[-1], grouping=True )
-	print "==================================================="
+	startingPortfolioValue = dataFrame.portfolio_value[0]
+	totalProfit = dataFrame.pnl.sum()
+	totalCapitalOutlay = -(dataFrame.capital_used.sum())
+	totalReturn = totalProfit / totalCapitalOutlay
+
+	print "=========== Portfolio Summary ==========="
+	print " Starting Value: %s" % locale.currency(startingPortfolioValue, grouping=True)
+	print "                   "
+	print " Captial Outlay: %s" % (locale.currency(totalCapitalOutlay, grouping=True))
+	print "    Profit/Loss: %s (%s)" % (locale.currency(totalProfit, grouping=True), '{:.2%}'.format(totalReturn))
+	print " Position Value: %s" % locale.currency(dataFrame.ending_value[-1], grouping=True)
+	print "                   "
+	print "Portfolio Total: %s" % locale.currency(dataFrame.portfolio_value[-1], grouping=True)
+	print "========================================="
 
 if __name__ == "__main__":
     main()
