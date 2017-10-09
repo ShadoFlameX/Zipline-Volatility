@@ -59,7 +59,7 @@ def printSummary(dataFrame):
     startingPortfolioValue = dataFrame.portfolio_value[0]
     totalProfit = dataFrame.pnl.sum()
     totalCapitalOutlay = -(dataFrame.capital_used.sum())
-    totalReturn = totalProfit / totalCapitalOutlay
+    totalReturn = totalProfit / totalCapitalOutlay if totalCapitalOutlay > 0 else 0   
 
     print "=========== Portfolio Summary ==========="
     print " Starting Value: %s" % locale.currency(startingPortfolioValue, grouping=True)
